@@ -113,12 +113,6 @@ A collection of **Unreal Engine 5 gameplay systems in C++** that form the functi
 
 ---
 
-## 📄 License
-
-MIT (recommended). Add a `LICENSE` file if you plan to share/extend publicly.
-
----
-
 ## 🙌 Author
 
 Built by **Hubert Zambrzycki** — C++/UE5 developer.  
