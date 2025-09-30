@@ -1,27 +1,48 @@
-# Unreal-Engine-5
-Files in C++ that make up the functional base of different mechanics in a game
+# 🎮 Unreal Engine 5 – Gameplay Systems (C++)
 
-The code is divided into different sections.
+A collection of **Unreal Engine 5 gameplay systems in C++** that form the functional base of different game mechanics: characters, items, combat touchpoints (hit boxes & damage), breakable actors, pick-ups, UI widgets for attributes, and more.  
+> Original goal: keep these systems modular so they can be dropped into any UE5 C++ project as a starting point.  
 
-The Breakable section is based on objects that we can destroy by implementing a force on its structure.
+---
 
-The Characters section is divided into BaseCharacter, which is the parent class for the rest of the characters we make, GAnimInstance is used to create Animation Blueprints for the characters, and GreystoneCharacter has all the methods of the character we play with.
+## ✨ What’s inside
 
-In the Components section we have defined the class that will be used to create the Widget with the different attributes of the characters, life, stamina, mana among others.
+> High-level modules as described in this repo’s docs and sources.
 
-In the Enemy section we define a child of BaseCharacter that will be used to create different enemies with their attributes, methods, among others.
+- **Breakables**  
+  Actors you can destroy by applying forces to their structure (e.g., radial impulses). Useful for props with physical reactions. :contentReference[oaicite:1]{index=1}
 
-In the Interfaces section we have HitInterfaces that is based on an interface to implement the fact of receiving damage or receiving it.
+- **Characters**  
+  - `BaseCharacter`: parent class with common movement, attributes, and hooks for combat.  
+  - `GreystoneCharacter`: the playable character implementing the specific abilities/inputs.  
+  - `GAnimInstance`: `UAnimInstance` used to drive Animation Blueprints for state-based animation logic. :contentReference[oaicite:2]{index=2}
 
-PickupInterface is based on implementing the pickup of objects, souls, anima
+- **Enemy**  
+  Child of `BaseCharacter` with enemy-specific attributes and behaviors (damage reception, attacks, etc.). :contentReference[oaicite:3]{index=3}
 
-In the Items section we have several classes.
+- **Interfaces**  
+  - **HitInterface**: receiving & processing hit/damage events.  
+  - **PickupInterface**: handling object pick-ups such as **Souls** or **Treasure**. :contentReference[oaicite:4]{index=4}
 
-Weapon's:
-It involves all the operation of the weapons and their hit box, collisions, effects, equip, unequip.
+- **Items**  
+  - `Item`: base class for pickable objects.  
+  - `Weapon`: equips/unequips, manages collisions / hit boxes and VFX/SFX triggers.  
+  - `Soul` & `Treasure`: item types with their own animations/feedback. :contentReference[oaicite:5]{index=5}
 
-The item class involves any object that we can pick up, it will be the parent of the Soul and Treasure child classes, both are objects with their respective animations.
+- **Components & UI**  
+  Attribute/Stats component (health, stamina, mana) + **Widget/HUD** that displays these values and attaches to characters. :contentReference[oaicite:6]{index=6}
 
-The Pawns section includes the Bird class that is based on the logical operation of programming a flying bird.
+- **Pawns**  
+  `Bird`: logic for a flying pawn (movement loop / steering). :contentReference[oaicite:7]{index=7}
 
-And the Widget section finally involves everything related to the display of life, stamina and the fact of being attachable to the characters
+- **Debug utilities**  
+  `DebugMacros.h`: helper macros for quick on-screen logs and draw-debug calls during gameplay.
+
+> Language breakdown on GitHub shows **C++ ~95%** (plus minor C). :contentReference[oaicite:8]{index=8}
+
+---
+
+## 🧱 Project structure (typical UE5 layout)
+
+This repository is a code pack, intended to live under a UE5 project’s `Source/<YourProject>/`:
+
