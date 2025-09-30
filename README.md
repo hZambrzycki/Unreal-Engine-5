@@ -44,5 +44,86 @@ A collection of **Unreal Engine 5 gameplay systems in C++** that form the functi
 
 ## 🧱 Project structure (typical UE5 layout)
 
+
+> If your folders differ, keep class names consistent and include headers accordingly.
+
+---
+
+## 🚀 Getting started
+
+### Requirements
+- **Unreal Engine 5.x** (C++ project)
+- **Visual Studio 2022** (Windows) or **Xcode** (macOS)
+- C++ toolchain compatible with UE5
+
+### Install (add to an existing UE5 C++ project)
+1. Create (or use) a **UE5 C++** project.  
+2. Copy these headers/sources into `Source/<YourProject>/` keeping the folder grouping above.  
+3. Add module includes if needed in `<YourProject>.Build.cs`.  
+4. **Regenerate project files** (right-click the `.uproject`).  
+5. Build from your IDE and launch the editor.
+
+---
+
+## 🧩 Usage notes & extension points
+
+- **Hit / Damage flow**  
+  Implement `HitInterface` on actors that can take damage; weapons call the interface when their hit box overlaps a valid target.
+
+- **Pick-ups**  
+  Implement `PickupInterface` to grant resources (e.g., Souls/Treasure) on overlap; throttle via cooldown or once-per-actor flags.
+
+- **Weapons**  
+  Use weapon equip/unequip methods to attach meshes to sockets; enable collision only during attack windows (notify-driven).
+
+- **Attributes & UI**  
+  The attribute component exposes getters/setters for **health**, **stamina**, **mana**; bind the Widget to update bars and text.
+
+- **Breakables**  
+  Spawn breakable actors and apply forces (e.g., `AddImpulse`/`RadialForce`) on impact to fracture/destroy pieces.
+
+- **Animation**  
+  `GAnimInstance` serves as the ABP logic layer (movement states, montage sections, notifies for enabling weapon collision, etc.).
+
+- **Debug**  
+  Include `DebugMacros.h` to toggle on-screen logs / draw helpers while iterating.
+
+> These systems are intentionally decoupled so you can replace pieces (e.g., your own AttributeComponent or different weapon tracing).
+
+---
+
+## 🧪 Testing in-editor
+
+- Create a simple test **Level**: place a `GreystoneCharacter` PlayerStart, an `Enemy`, a `Weapon` pickup, a couple of `Breakables`, and a **HUD** Widget.  
+- Validate loops:
+  - Weapon equip → attack → hit interface triggers → enemy health decreases  
+  - Pickup Soul/Treasure → UI updates  
+  - Breakable receives force → destroys properly  
+  - Bird pawn pathing (if placed) behaves as expected
+
+---
+
+## 📦 Roadmap ideas
+
+- AIController/BT for `Enemy` (patrol, chase, attack)  
+- Damage types (physical/elemental), resistances & status effects  
+- Save/Load for attributes & inventory  
+- Network replication passes for combat & pickups  
+- DataAssets for tuning items and characters
+
+---
+
+## 📄 License
+
+MIT (recommended). Add a `LICENSE` file if you plan to share/extend publicly.
+
+---
+
+## 🙌 Author
+
+Built by **Hubert Zambrzycki** — C++/UE5 developer.  
+Focused on clean, reusable gameplay foundations for rapid iteration.
+
+
 This repository is a code pack, intended to live under a UE5 project’s `Source/<YourProject>/`:
 
